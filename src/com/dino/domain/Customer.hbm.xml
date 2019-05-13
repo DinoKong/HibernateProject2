@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.dino.domain.Customer" table="customer">
+        <!--        建立类属性哪一个是主键 还要跟数据库当中的主键进行对应-->
+        <id name="cust_id" column="cust_id">
+            <generator class="native"/>
+        </id>
+        <!--        建立类中的普通属性与数据库当中字段进行关联-->
+        <property name="cust_name" column="cust_name" />
+        <property name="cust_source" column="cust_source" />
+        <property name="cust_industry" column="cust_industry" />
+        <property name="cust_level" column="cust_level" />
+        <property name="cust_phone" column="cust_phone" />
+        <property name="cust_mobile" column="cust_mobile" />
+
+<!--        一对多-->
+        <set name="linkmen" cascade="save-update, delete" inverse="true">
+            <key column="link_cust_id"></key>
+            <one-to-many class="com.dino.domain.Linkman"></one-to-many>
+        </set>
+    </class>
+</hibernate-mapping>

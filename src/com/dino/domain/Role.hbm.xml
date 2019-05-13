@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.dino.domain.Role" table="role">
+        <!--        建立类属性哪一个是主键 还要跟数据库当中的主键进行对应-->
+        <id name="role_id" column="role_id">
+            <generator class="native"/>
+        </id>
+        <!--        建立类中的普通属性与数据库当中字段进行关联-->
+        <property name="role_memo" />
+        <property name="role_name" />
+
+<!--        多对多关系-->
+        <set name="users" table="user_role" inverse="true">
+            <key column="role_id"></key>
+            <many-to-many class="com.dino.domain.User" column="user_id" />
+        </set>
+    </class>
+</hibernate-mapping>
